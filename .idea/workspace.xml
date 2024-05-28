@@ -4,19 +4,16 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="677e4d05-5e52-4825-b96f-36d3d1d3a6ac" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/.gitignore" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/modules.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/vcs.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/ModuleOneFinalProject.iml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/cryptology/Main.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/cryptology/cipher/CaesarCipher.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/cryptology/cryptanalysis/BruteForceAnalyzer.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/cryptology/cryptanalysis/StatisticalAnalyzer.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/cryptology/gui/CryptoGUI.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/cryptology/util/CharacterUtils.java" afterDir="false" />
+    <list default="true" id="677e4d05-5e52-4825-b96f-36d3d1d3a6ac" name="Changes" comment="refacto existing methods, add resources package with properties, txt files and Config loader class">
+      <change afterPath="$PROJECT_DIR$/src/README.md" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/cryptology/util/ConfigLoader.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/resources/alphabet.properties" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/resources/english_words.txt" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/resources/spanish_words.txt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/cryptology/cipher/CaesarCipher.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/cryptology/cipher/CaesarCipher.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/cryptology/cryptanalysis/BruteForceAnalyzer.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/cryptology/cryptanalysis/BruteForceAnalyzer.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/cryptology/gui/CryptoGUI.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/cryptology/gui/CryptoGUI.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -32,6 +29,9 @@
   </component>
   <component name="Git.Settings">
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
+  </component>
+  <component name="MarkdownSettingsMigration">
+    <option name="stateVersion" value="1" />
   </component>
   <component name="ProjectColorInfo"><![CDATA[{
   "associatedIndex": 7
@@ -87,6 +87,20 @@
       <option name="presentableId" value="Default" />
       <updated>1715443663002</updated>
     </task>
+    <task id="LOCAL-00001" summary="add caesar cipher first implementation">
+      <option name="closed" value="true" />
+      <created>1715445628152</created>
+      <option name="number" value="00001" />
+      <option name="presentableId" value="LOCAL-00001" />
+      <option name="project" value="LOCAL" />
+      <updated>1715445628153</updated>
+    </task>
+    <option name="localTasksCounter" value="2" />
     <servers />
+  </component>
+  <component name="VcsManagerConfiguration">
+    <MESSAGE value="add caesar cipher first implementation" />
+    <MESSAGE value="refacto existing methods, add resources package with properties, txt files and Config loader class" />
+    <option name="LAST_COMMIT_MESSAGE" value="refacto existing methods, add resources package with properties, txt files and Config loader class" />
   </component>
 </project>
