@@ -1,61 +1,50 @@
 package main.java.cryptology.cryptanalysis;
 
 import main.java.cryptology.cipher.CaesarCipher;
-import main.java.cryptology.cipher.Cipher;
+import main.java.cryptology.util.ConfigLoader;
+import main.java.cryptology.util.SingletonNotifier;
 
-import java.util.HashMap;
-import java.util.Map;
+import java.util.Set;
+import java.util.function.Predicate;
 
 public class StatisticalAnalyzer {
+    private Set<String> commonWords;
 
-    public static Map<Character, Double> calculateFrequency(String text, String alphabet) {
-        Map<Character, Integer> counts = new HashMap<>();
-        text = text.toUpperCase();
-        int totalChars = 0;
-
-        for (char c : text.toCharArray()) {
-            if (alphabet.indexOf(c) >= 0) {
-                counts.put(c, counts.getOrDefault(c, 0) + 1);
-                totalChars++;
-            }
-        }
-
-        Map<Character, Double> frequencies = new HashMap<>();
-        for (Map.Entry<Character, Integer> entry : counts.entrySet()) {
-            frequencies.put(entry.getKey(), entry.getValue() / (double) totalChars);
-        }
-
-        return frequencies;
+    public StatisticalAnalyzer(String language) {
+        this.commonWords = ConfigLoader.loadCommonWords(language);
     }
 
-    public static String analyzeByFrequency(String cipherText, String referenceText, String alphabet) {
-        Map<Character, Double> cipherFrequencies = calculateFrequency(cipherText, alphabet);
-        Map<Character, Double> referenceFrequencies = calculateFrequency(referenceText, alphabet);
+    public String analyze(String cipherText, String alphabet) {
+        var notifier = SingletonNotifier.getNotifier();
+        int alphabetLength = alphabet.length();
+        notifier.notifyInfo("Starting statistical analysis...");
 
-        int bestShift = findBestShift(cipherFrequencies, referenceFrequencies, alphabet);
-        Cipher cipher = new CaesarCipher(bestShift, alphabet);
+        Predicate<String> isValidText = createValidTextPredicate(this.commonWords);
 
-        return cipher.decrypt(cipherText);
-    }
+        for (int shift = 0; shift < alphabetLength; shift++) {
+            var cipher = new CaesarCipher(shift, alphabet);
+            var decryptedText = cipher.decrypt(cipherText);
+            notifier.notifyInfo("Shift " + shift + ": " + decryptedText);
 
-    private static int findBestShift(Map<Character, Double> cipherFreq, Map<Character, Double> refFreq, String alphabet) {
-        double minDifference = Double.MAX_VALUE;
-        int bestShift = 0;
-
-        for (int shift = 0; shift < alphabet.length(); shift++) {
-            double difference = 0;
-            for (char ch : refFreq.keySet()) {
-                char shiftedChar = alphabet.charAt((alphabet.indexOf(ch) + shift) % alphabet.length());
-                double freqDifference = refFreq.get(ch) - cipherFreq.getOrDefault(shiftedChar, 0.0);
-                difference += Math.pow(freqDifference, 2);
-            }
-
-            if (difference < minDifference) {
-                minDifference = difference;
-                bestShift = shift;
+            if (isValidText.test(decryptedText)) {
+                notifier.notifyInfo("Potential decryption found at shift " + shift + ": " + decryptedText);
+                return decryptedText;
             }
         }
 
-        return bestShift;
+        notifier.notifyInfo("No valid decryption found.");
+        return "No valid decryption found.";
+    }
+
+    private Predicate<String> createValidTextPredicate(Set<String> commonWords) {
+        return text -> {
+            String[] words = text.toLowerCase().split("\\s+");
+            for (String word : words) {
+                if (commonWords.contains(word)) {
+                    return true;
+                }
+            }
+            return false;
+        };
     }
 }

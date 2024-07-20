@@ -3,6 +3,7 @@ package main.java.cryptology.gui;
 import main.java.cryptology.cipher.CaesarCipher;
 import main.java.cryptology.cipher.Cipher;
 import main.java.cryptology.cryptanalysis.BruteForce;
+import main.java.cryptology.cryptanalysis.StatisticalAnalyzer;
 import main.java.cryptology.util.CharacterUtils;
 import main.java.cryptology.util.ConfigLoader;
 
@@ -12,15 +13,14 @@ import java.util.Objects;
 
 public class CryptoGUI extends JFrame {
     private JTextField txtInput, txtOutput, txtShift;
-    private JComboBox<String> languageSelector, methodSelector;
-    private JButton btnEncrypt, btnDecrypt, btnAnalyze;
+    private JComboBox<String> languageSelector;
+    private JButton btnEncrypt, btnDecrypt, btnBruteForce, btnStatisticalAnalysis;
     private static final String[] LANGUAGES = {"English", "Spanish"};
-    private static final String[] METHODS = {"Brute Force", "Statistical Analysis"};
 
     public CryptoGUI() {
         setTitle("Caesar Cipher");
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        setSize(450, 450);
+        setSize(450, 500);
         setLocationRelativeTo(null);
         setLayout(new GridBagLayout());
 
@@ -42,20 +42,20 @@ public class CryptoGUI extends JFrame {
         txtOutput.setEditable(false);
         txtShift = new JTextField("0");
         languageSelector = new JComboBox<>(LANGUAGES);
-        methodSelector = new JComboBox<>(METHODS);
 
         btnEncrypt = new JButton("Encrypt");
         btnDecrypt = new JButton("Decrypt");
-        btnAnalyze = new JButton("Perform Analysis");
+        btnBruteForce = new JButton("Brute force decrypt");
+        btnStatisticalAnalysis = new JButton("Statistical analysis");
 
         addComponent(gbc, "Input text:", txtInput);
         addComponent(gbc, "Shift amount:", txtShift);
         addComponent(gbc, "Select language:", languageSelector);
-        addComponent(gbc, "Analysis Method:", methodSelector);
         addComponent(gbc, "Output text:", txtOutput);
         add(btnEncrypt, gbc);
         add(btnDecrypt, gbc);
-        add(btnAnalyze, gbc);
+        add(btnBruteForce, gbc);
+        add(btnStatisticalAnalysis, gbc);
     }
 
     private void addComponent(GridBagConstraints gbc, String label, Component comp) {
@@ -67,7 +67,8 @@ public class CryptoGUI extends JFrame {
         languageSelector.addActionListener(e -> loadCharacterSet(Objects.requireNonNull(languageSelector.getSelectedItem()).toString().toLowerCase()));
         btnEncrypt.addActionListener(e -> performEncryption());
         btnDecrypt.addActionListener(e -> performDecryption());
-        btnAnalyze.addActionListener(e -> performAnalysis());
+        btnBruteForce.addActionListener(e -> performBruteForce());
+        btnStatisticalAnalysis.addActionListener(e -> performStatisticalAnalysis());
     }
 
     private void performEncryption() {
@@ -90,16 +91,26 @@ public class CryptoGUI extends JFrame {
         txtOutput.setText(cipher.decrypt(input));
     }
 
-    private void performAnalysis() {
-        var input = txtInput.getText();
-        var method = (String) methodSelector.getSelectedItem();
-        var alphabet = ConfigLoader.loadAlphabet(Objects.requireNonNull(languageSelector.getSelectedItem()).toString().toLowerCase());
+    private void performBruteForce() {
+        String input = txtInput.getText();
+        String alphabet = ConfigLoader.loadAlphabet(Objects.requireNonNull(languageSelector.getSelectedItem()).toString().toLowerCase());
+        txtOutput.setText("Brute force decryption started, check console for results.");
+        assert alphabet != null;
+        BruteForce.bruteForceDecrypt(input, alphabet);
+    }
 
-        if ("Brute Force".equals(method)) {
-            assert alphabet != null;
-            BruteForce.bruteForceDecrypt(input, alphabet);
-        } else if ("Statistical analysis".equals(method)) {
-            txtOutput.setText("Statistical analysis feature is currently under development.");
+    private void performStatisticalAnalysis() {
+        String input = txtInput.getText();
+        String alphabet = ConfigLoader.loadAlphabet(Objects.requireNonNull(languageSelector.getSelectedItem()).toString().toLowerCase());
+        String language = (String) languageSelector.getSelectedItem();
+
+        if (alphabet != null && language != null) {
+            StatisticalAnalyzer analyzer = new StatisticalAnalyzer(language.toLowerCase());
+            String analysisResult = analyzer.analyze(input, alphabet);
+            txtOutput.setText(analysisResult);
+            System.out.println("Statistical Analysis Complete: " + analysisResult);
+        } else {
+            txtOutput.setText("Error: Could not load resources for analysis.");
         }
     }
 

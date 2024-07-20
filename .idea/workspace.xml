@@ -4,15 +4,15 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="677e4d05-5e52-4825-b96f-36d3d1d3a6ac" name="Changes" comment="relocate the sources package to src root&#10;add some characters to enable encrypt and brute force&#10;dynamically load allowed characters from config file, add new helper method in the CharacterUtils class and load them at application start or when language is changed&#10;change CaesarCipher methods flexible and remove static methods, refacto CryptoGUI class">
-      <change afterPath="$PROJECT_DIR$/.idea/uiDesigner.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/cryptology/cipher/Cipher.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/cryptology/cryptanalysis/BruteForce.java" afterDir="false" />
+    <list default="true" id="677e4d05-5e52-4825-b96f-36d3d1d3a6ac" name="Changes" comment="add interface for decrypt and encrypt and use it in the GUI logic&#10;change brute force logic for more robust one">
+      <change afterPath="$PROJECT_DIR$/src/main/java/cryptology/util/ConsoleNotifier.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/cryptology/util/Notifier.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/cryptology/util/SingletonNotifier.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/cryptology/cipher/CaesarCipher.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/cryptology/cipher/CaesarCipher.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/cryptology/cryptanalysis/BruteForceAnalyzer.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/cryptology/cryptanalysis/BruteForce.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/cryptology/cryptanalysis/BruteForce.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/cryptology/cryptanalysis/StatisticalAnalyzer.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/cryptology/cryptanalysis/StatisticalAnalyzer.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/cryptology/gui/CryptoGUI.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/cryptology/gui/CryptoGUI.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/cryptology/util/ConfigLoader.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/cryptology/util/ConfigLoader.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -22,8 +22,8 @@
   <component name="FileTemplateManagerImpl">
     <option name="RECENT_TEMPLATES">
       <list>
-        <option value="Class" />
         <option value="Interface" />
+        <option value="Class" />
       </list>
     </option>
   </component>
@@ -122,7 +122,15 @@
       <option name="project" value="LOCAL" />
       <updated>1721481952715</updated>
     </task>
-    <option name="localTasksCounter" value="5" />
+    <task id="LOCAL-00005" summary="add interface for decrypt and encrypt and use it in the GUI logic&#10;change brute force logic for more robust one">
+      <option name="closed" value="true" />
+      <created>1721491509307</created>
+      <option name="number" value="00005" />
+      <option name="presentableId" value="LOCAL-00005" />
+      <option name="project" value="LOCAL" />
+      <updated>1721491509307</updated>
+    </task>
+    <option name="localTasksCounter" value="6" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -141,6 +149,7 @@
     <MESSAGE value="refacto existing methods, add resources package with properties, txt files and Config loader class" />
     <MESSAGE value="refacto readme file" />
     <MESSAGE value="relocate the sources package to src root&#10;add some characters to enable encrypt and brute force&#10;dynamically load allowed characters from config file, add new helper method in the CharacterUtils class and load them at application start or when language is changed&#10;change CaesarCipher methods flexible and remove static methods, refacto CryptoGUI class" />
-    <option name="LAST_COMMIT_MESSAGE" value="relocate the sources package to src root&#10;add some characters to enable encrypt and brute force&#10;dynamically load allowed characters from config file, add new helper method in the CharacterUtils class and load them at application start or when language is changed&#10;change CaesarCipher methods flexible and remove static methods, refacto CryptoGUI class" />
+    <MESSAGE value="add interface for decrypt and encrypt and use it in the GUI logic&#10;change brute force logic for more robust one" />
+    <option name="LAST_COMMIT_MESSAGE" value="add interface for decrypt and encrypt and use it in the GUI logic&#10;change brute force logic for more robust one" />
   </component>
 </project>
