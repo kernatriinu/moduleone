@@ -7,10 +7,10 @@ import java.util.*;
 import java.util.stream.Collectors;
 
 public class ConfigLoader {
-    private static final String RESOURCE_PATH = "src/main/resources/";
+    private static final String RESOURCE_PATH = "src/resources/";
 
     public static Set<String> loadCommonWords(String language) {
-        var path = Paths.get("src/main/resources/" + language + "_words.txt");
+        var path = Paths.get("src/resources/" + language + "_words.txt");
         try {
             System.out.println("Loading words from: " + path);
             Set<String> words = Files.lines(path)

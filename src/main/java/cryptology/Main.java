@@ -1,6 +1,7 @@
 package main.java.cryptology;
 
 import javax.swing.*;
+
 import main.java.cryptology.gui.CryptoGUI;
 
 public class Main {

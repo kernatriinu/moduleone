@@ -1,15 +1,23 @@
 package main.java.cryptology.cipher;
 
 public class CaesarCipher {
-    public static String encrypt(String text, int shift, String alphabet) {
-        return shiftText(text, shift, alphabet);
+    private int shift;
+    private String alphabet;
+
+    public CaesarCipher(int shift, String alphabet) {
+        this.shift = shift;
+        this.alphabet = alphabet;
     }
 
-    public static String decrypt(String text, int shift, String alphabet) {
-        return shiftText(text, -shift, alphabet);
+    public String encrypt(String text) {
+        return shiftText(text, shift);
     }
 
-    private static String shiftText(String text, int shift, String alphabet) {
+    public String decrypt(String text) {
+        return shiftText(text, -shift);
+    }
+
+    private String shiftText(String text, int shift) {
         StringBuilder result = new StringBuilder();
         int alphabetSize = alphabet.length();
         text = text.toUpperCase();

@@ -8,13 +8,14 @@ import javax.swing.*;
 import java.awt.*;
 import java.util.Objects;
 
-import static main.java.cryptology.cryptanalysis.BruteForceAnalyzer.createValidTextPredicate;
-
 public class CryptoGUI extends JFrame {
-    private final JTextField txtInput;
-    private final JTextField txtOutput;
-    private final JTextField txtShift;
-    private final JComboBox<String> languageSelector;
+    private JTextField txtInput;
+    private JTextField txtOutput;
+    private JTextField txtShift;
+    private JComboBox<String> languageSelector;
+    private JButton btnEncrypt;
+    private JButton btnDecrypt;
+    private JButton btnBruteForce;
     private final static String[] LANGUAGES = {"English", "Spanish"};
 
     public CryptoGUI() {
@@ -24,13 +25,21 @@ public class CryptoGUI extends JFrame {
         setLocationRelativeTo(null);
         setLayout(new GridLayout(7, 2, 10, 10));
 
+        initializeComponents();
+        setupListeners();
+        loadInitialSettings();
+
+        setVisible(true);
+    }
+
+    private void initializeComponents() {
         txtInput = new JTextField();
         txtOutput = new JTextField();
         txtShift = new JTextField();
         languageSelector = new JComboBox<>(LANGUAGES);
-        JButton btnEncrypt = new JButton("Encrypt");
-        JButton btnDecrypt = new JButton("Decrypt");
-        JButton btnBruteForce = new JButton("Brute force decrypt");
+        btnEncrypt = new JButton("Encrypt");
+        btnDecrypt = new JButton("Decrypt");
+        btnBruteForce = new JButton("Brute force decrypt");
 
         add(new JLabel("Input text:"));
         add(txtInput);
@@ -43,13 +52,21 @@ public class CryptoGUI extends JFrame {
         add(btnEncrypt);
         add(btnDecrypt);
         add(btnBruteForce);
+    }
+
+    private void setupListeners() {
+        languageSelector.addActionListener(e -> {
+            var selectedLanguage = Objects.requireNonNull(languageSelector.getSelectedItem()).toString().toLowerCase();
+            loadCharacterSet(selectedLanguage);
+        });
 
         btnEncrypt.addActionListener(e -> {
             var input = txtInput.getText();
-            if (CharacterUtils.isLettersAndSpaces(input)) {
-                int shift = Integer.parseInt(txtShift.getText());
-                var alphabet = ConfigLoader.loadAlphabet(Objects.requireNonNull(languageSelector.getSelectedItem()).toString().toLowerCase());
-                txtOutput.setText(CaesarCipher.encrypt(input, shift, alphabet));
+            var alphabet = ConfigLoader.loadAlphabet(Objects.requireNonNull(languageSelector.getSelectedItem()).toString().toLowerCase());
+            int shift = Integer.parseInt(txtShift.getText());
+            if (CharacterUtils.isAllowedCharacters(input)) {
+                CaesarCipher cipher = new CaesarCipher(shift, alphabet);
+                txtOutput.setText(cipher.encrypt(input));
             } else {
                 JOptionPane.showMessageDialog(this, "Input contains invalid characters!", "Error", JOptionPane.ERROR_MESSAGE);
             }
@@ -57,9 +74,10 @@ public class CryptoGUI extends JFrame {
 
         btnDecrypt.addActionListener(e -> {
             var input = txtInput.getText();
-            int shift = Integer.parseInt(txtShift.getText());
             var alphabet = ConfigLoader.loadAlphabet(Objects.requireNonNull(languageSelector.getSelectedItem()).toString().toLowerCase());
-            txtOutput.setText(CaesarCipher.decrypt(input, shift, alphabet));
+            int shift = Integer.parseInt(txtShift.getText());
+            CaesarCipher cipher = new CaesarCipher(shift, alphabet);
+            txtOutput.setText(cipher.decrypt(input));
         });
 
         btnBruteForce.addActionListener(e -> {
@@ -67,12 +85,26 @@ public class CryptoGUI extends JFrame {
             var alphabet = ConfigLoader.loadAlphabet(Objects.requireNonNull(languageSelector.getSelectedItem()).toString().toLowerCase());
             var commonWords = ConfigLoader.loadCommonWords(languageSelector.getSelectedItem().toString().toLowerCase());
 
-            var isValidText = createValidTextPredicate(commonWords);
-
+            var isValidText = BruteForceAnalyzer.createValidTextPredicate(commonWords);
+            assert alphabet != null;
             var result = BruteForceAnalyzer.decrypt(input, isValidText, alphabet);
             txtOutput.setText(result);
         });
+    }
 
-        setVisible(true);
+    private void loadInitialSettings() {
+        // Load the default alphabet and allowed characters
+        var defaultLanguage = "english";
+        loadCharacterSet(defaultLanguage);
+    }
+
+    private void loadCharacterSet(String language) {
+        var characters = ConfigLoader.loadAlphabet(language);
+        if (characters != null) {
+            CharacterUtils.loadAllowedCharacters(characters);
+            System.out.println("CharacterSet loaded for " + language);  // Debug statement
+        } else {
+            JOptionPane.showMessageDialog(this, "Failed to load character set for " + language, "Error", JOptionPane.ERROR_MESSAGE);
+        }
     }
 }

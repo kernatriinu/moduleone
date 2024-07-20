@@ -4,16 +4,18 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="677e4d05-5e52-4825-b96f-36d3d1d3a6ac" name="Changes" comment="refacto existing methods, add resources package with properties, txt files and Config loader class">
-      <change afterPath="$PROJECT_DIR$/src/README.md" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/cryptology/util/ConfigLoader.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/resources/alphabet.properties" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/resources/english_words.txt" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/resources/spanish_words.txt" afterDir="false" />
+    <list default="true" id="677e4d05-5e52-4825-b96f-36d3d1d3a6ac" name="Changes" comment="refacto readme file">
+      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/cryptology/Main.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/cryptology/Main.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/cryptology/cipher/CaesarCipher.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/cryptology/cipher/CaesarCipher.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/cryptology/cryptanalysis/BruteForceAnalyzer.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/cryptology/cryptanalysis/BruteForceAnalyzer.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/cryptology/gui/CryptoGUI.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/cryptology/gui/CryptoGUI.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/cryptology/util/CharacterUtils.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/cryptology/util/CharacterUtils.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/cryptology/util/ConfigLoader.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/cryptology/util/ConfigLoader.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/alphabet.properties" beforeDir="false" afterPath="$PROJECT_DIR$/src/resources/alphabet.properties" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/english_words.txt" beforeDir="false" afterPath="$PROJECT_DIR$/src/resources/english_words.txt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/spanish_words.txt" beforeDir="false" afterPath="$PROJECT_DIR$/src/resources/spanish_words.txt" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -33,9 +35,9 @@
   <component name="MarkdownSettingsMigration">
     <option name="stateVersion" value="1" />
   </component>
-  <component name="ProjectColorInfo"><![CDATA[{
-  "associatedIndex": 7
-}]]></component>
+  <component name="ProjectColorInfo">{
+  &quot;associatedIndex&quot;: 7
+}</component>
   <component name="ProjectId" id="2gKQCG9JfAWTkDW4xR4DLIEhxGq" />
   <component name="ProjectLevelVcsManager" settingsEditedManually="true" />
   <component name="ProjectViewState">
@@ -46,8 +48,10 @@
   </component>
   <component name="PropertiesComponent"><![CDATA[{
   "keyToString": {
+    "Application.Main.executor": "Run",
     "RunOnceActivity.OpenProjectViewOnStart": "true",
-    "RunOnceActivity.ShowReadmeOnStart": "true"
+    "RunOnceActivity.ShowReadmeOnStart": "true",
+    "kotlin-language-version-configured": "true"
   }
 }]]></component>
   <component name="RecentsManager">
@@ -95,12 +99,29 @@
       <option name="project" value="LOCAL" />
       <updated>1715445628153</updated>
     </task>
-    <option name="localTasksCounter" value="2" />
+    <task id="LOCAL-00002" summary="refacto existing methods, add resources package with properties, txt files and Config loader class">
+      <option name="closed" value="true" />
+      <created>1716912356030</created>
+      <option name="number" value="00002" />
+      <option name="presentableId" value="LOCAL-00002" />
+      <option name="project" value="LOCAL" />
+      <updated>1716912356030</updated>
+    </task>
+    <task id="LOCAL-00003" summary="refacto readme file">
+      <option name="closed" value="true" />
+      <created>1716912494747</created>
+      <option name="number" value="00003" />
+      <option name="presentableId" value="LOCAL-00003" />
+      <option name="project" value="LOCAL" />
+      <updated>1716912494748</updated>
+    </task>
+    <option name="localTasksCounter" value="4" />
     <servers />
   </component>
   <component name="VcsManagerConfiguration">
     <MESSAGE value="add caesar cipher first implementation" />
     <MESSAGE value="refacto existing methods, add resources package with properties, txt files and Config loader class" />
-    <option name="LAST_COMMIT_MESSAGE" value="refacto existing methods, add resources package with properties, txt files and Config loader class" />
+    <MESSAGE value="refacto readme file" />
+    <option name="LAST_COMMIT_MESSAGE" value="refacto readme file" />
   </component>
 </project>

@@ -14,9 +14,12 @@ public class BruteForceAnalyzer {
         int alphabetLength = alphabet.length();
         System.out.println("Starting brute force decryption...");
         for (int shift = 0; shift < alphabetLength; shift++) {
-            var decryptedText = CaesarCipher.decrypt(cipherText, shift, alphabet);
+            CaesarCipher cipher = new CaesarCipher(shift, alphabet);
+            var decryptedText = cipher.decrypt(cipherText);
             System.out.println("Shift " + shift + ": " + decryptedText + " | Testing validity...");
-            if (isValidText.test(decryptedText)) {
+            String cleanedText = decryptedText.replaceAll("[^a-zA-Z\\s]", "").toLowerCase();
+
+            if (isValidText.test(cleanedText)) {
                 System.out.println("Valid decryption found at shift " + shift + ": " + decryptedText);
 
                 return decryptedText;
@@ -29,7 +32,8 @@ public class BruteForceAnalyzer {
 
     public static Predicate<String> createValidTextPredicate(Set<String> commonWords) {
         return text -> {
-            String[] words = text.toLowerCase().split("\\s+");
+            String cleanedText = text.replaceAll("[^a-zA-Z\\s]", "").toLowerCase();
+            String[] words = cleanedText.split("\\s+");
 
             return Arrays.stream(words).anyMatch(commonWords::contains);
         };
