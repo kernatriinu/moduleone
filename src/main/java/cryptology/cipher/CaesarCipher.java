@@ -1,6 +1,6 @@
 package main.java.cryptology.cipher;
 
-public class CaesarCipher {
+public class CaesarCipher implements Cipher {
     private int shift;
     private String alphabet;
 
@@ -9,10 +9,12 @@ public class CaesarCipher {
         this.alphabet = alphabet;
     }
 
+    @Override
     public String encrypt(String text) {
         return shiftText(text, shift);
     }
 
+    @Override
     public String decrypt(String text) {
         return shiftText(text, -shift);
     }
